@@ -13,6 +13,19 @@ html, body { overflow-x: hidden; }
 /* If any container still forces scrollbars */
 .front-page { overflow: overlay; }
 
+/* Remove top and bottom borders / lines */
+div.gt_table, 
+div.gt_table * {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove row numbers / index */
+.at-row-number, 
+.at-row-index {
+  display: none !important;
+}
+
 /* Optional: hide Awesome Table’s pager/header strip */
 ul.pagination,
 .at-pager,
@@ -21,3 +34,4 @@ ul.pagination,
   display: none !important;
   border: 0 !important;
 }
+
