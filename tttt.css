@@ -1,37 +1,51 @@
-/* 1) Load Tailwind first */
+/* 1) Load Tailwind first (keep this at the top) */
 @import url('https://cdn.jsdelivr.net/npm/tailwindcss@1.0.0/dist/tailwind.min.css');
 
-/* 2) Your overrides — these win because they come after Tailwind */
-
-/* Keep horizontal overflow hidden */
+/* 2) Your small global tweaks (keep what you already had if you want) */
 html, body { overflow-x: hidden; }
 
-/* Hide scrollbars (still allow scrolling) */
+/* Hide scrollbars but allow touch/scroll */
 *::-webkit-scrollbar { width: 0; height: 0; }
 * { scrollbar-width: none; -ms-overflow-style: none; }
 
 /* If any container still forces scrollbars */
 .front-page { overflow: overlay; }
 
-/* Remove top and bottom borders / lines */
-div.gt_table, 
-div.gt_table * {
-  border: none !important;
+/* ===== Remove the pager/header/footer and the thin lines ===== */
+
+/* Most common Awesome Table pager + header/footer containers */
+ul.pagination,
+nav.pagination,
+.at-pager,
+.at-pager-container,
+.cards_header,
+.cards_footer,
+.at-row-number,
+.at-row-index,
+.at-results,
+.at-from-to,
+.at-range {
+  display: none !important;
+  border: 0 !important;
   box-shadow: none !important;
 }
 
-/* Remove row numbers / index */
-.at-row-number, 
-.at-row-index {
-  display: none !important;
+/* Kill any <hr> rails just in case */
+.gt_table hr { display: none !important; height: 0 !important; }
+
+/* Nuke top/bottom borders/shadows that create those faint rails */
+.gt_table,
+.gt_table > * {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
 }
 
-/* Optional: hide Awesome Table’s pager/header strip */
-ul.pagination,
-.at-pager,
-.cards__footer,
-.cards__header {
+/* Safety net: on Cards layout, hide any siblings before/after the cards deck */
+.gt_table > div:not([class*="cards"]) {
+  /* this hides the small header/footer bars if they slip through */
   display: none !important;
+  height: 0 !important;
   border: 0 !important;
+  box-shadow: none !important;
 }
-
