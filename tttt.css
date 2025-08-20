@@ -49,3 +49,53 @@ nav.pagination,
   border: 0 !important;
   box-shadow: none !important;
 }
+
+/* ===== Modal cleanup: make the sheet fill the viewport on phones ===== */
+
+/* Keep the overlay on top */
+.modal { z-index: 99999; }
+
+/* Base modal panel */
+.modal__inner{
+  position: fixed;           /* lock to viewport */
+  inset: 0;                  /* top/right/bottom/left: 0 */
+  background: #fff;
+  overflow: auto;            /* single scroll area (no nested scrollers) */
+  padding: 16px;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;           /* don’t cap width on mobile */
+  box-sizing: border-box;
+  border-radius: 0;          /* flush to edges on phones */
+}
+
+/* Larger screens: center a card with soft corners */
+@media (min-width: 900px){
+  .modal__inner{
+    width: min(960px, 94vw);
+    height: 92vh;
+    top: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    inset: auto;             /* we’re positioning with top/left now */
+    border-radius: 12px;
+  }
+}
+
+/* Hide scrollbars inside the modal (still scrolls by touch/wheel) */
+.modal__inner::-webkit-scrollbar{ width:0; height:0; }
+.modal__inner{ scrollbar-width:none; -ms-overflow-style:none; }
+
+/* Image area: scale nicely without cropping and avoid tall images pushing past */
+.gd-box{ position: relative; }
+.modal-image{
+  width: 100%;
+  height: auto;
+  max-height: 60vh;          /* plenty of room left for the specs below */
+  object-fit: contain;       /* keep the whole photo visible */
+  background: #fff;
+}
+
+/* Make sure the nav arrows stay clickable over the image */
+.gd-nav-btn{ z-index: 2; }
+
